@@ -1,0 +1,91 @@
+module rgb2hsv( //RGB -> HSV conversion module
+    input logic[7:0] r,
+    input logic[7:0] g,
+    input logic[7:0] b,
+
+    output logic[7:0] h, //HSV output values
+    output logic[7:0] s,
+    output logic[7:0] v
+);
+
+//instantiate intermediate variables used in conversion
+logic[7:0] cmax; //max(R, G, B)
+logic[7:0] cmin; //min(R, G, B)
+logic[7:0] mid; //mid(R, G, B)
+logic[7:0] delta; //cmax - cmin
+logic[15:0] num; //16-bit numerator
+
+always @* begin
+    if((r >= g) && (r >= b)) begin //if R is biggest
+        assign cmax = r;
+        if(g >= b) begin
+            assign cmin = b;
+            assign mid = g;
+        end
+        else begin
+            assign cmin = g;
+            assign mid = b;
+        end
+    end
+
+    else if((g >= r) && (g >= b)) begin //if G is biggest
+        assign cmax = g;
+        if(r >= b) begin
+            assign cmin = b;
+            assign mid = r;
+        end
+        else begin
+            assign cmin = r;
+            assign mid = b;
+        end
+    end
+
+    else if((b >= r) && (b >= g)) begin //if B is biggest
+        assign cmax = b;
+        if(r >= g) begin
+            assign cmin = g;
+            assign mid = r;
+        end
+        else begin
+            assign cmin = r;
+            assign mid = g;
+        end
+    end
+
+    delta = cmax - cmin;
+    v = cmax; //compute value (V)
+
+    //calculate saturation (S)
+    num = 8'b11111111 * delta; //255 * (max - min)
+    s = num / cmax;
+
+    //calculate hue (H)
+    if(!delta) begin //if delta = 0
+        h = 8'b0;
+        s = 8'b0;
+    end
+
+    else if(cmax == r) begin //if R is max
+        num = (mid - cmin) / delta;
+        num = num % 6;
+        if(b > g) begin //adjustment for negative modulo
+            num = 6 - num;
+        end
+        num = 8'b00101011 * num;
+        h = num;
+    end
+
+    else if(cmax == g) begin //if G is max
+        num = 8'b00101011 * (mid - cmin);
+        h = num / delta;
+        h = 8'b01010101 + h;
+    end
+
+    else if(cmax == b) begin //if B is max
+        num = 8'b00101011 * (mid - cmin);
+        h = num / delta;
+        h = 8'b10101011 + h;
+    end
+end
+
+endmodule
