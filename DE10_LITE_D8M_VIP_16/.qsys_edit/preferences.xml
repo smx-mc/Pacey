@@ -7,7 +7,6 @@
    <irq preferredWidth="34" />
   </columns>
  </systemtable>
- <library
-   expandedCategories="Library/Basic Functions/On Chip Memory,Library/Basic Functions,Library,Project" />
- <window width="974" height="1047" x="-7" y="0" />
+ <library expandedCategories="Project,Library" />
+ <window width="1100" height="800" x="0" y="0" />
 </preferences>
