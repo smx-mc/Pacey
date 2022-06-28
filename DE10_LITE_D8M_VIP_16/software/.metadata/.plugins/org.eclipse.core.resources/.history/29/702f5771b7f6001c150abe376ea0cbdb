@@ -266,7 +266,7 @@ int main()
 	  }
 	  usleep(5000);
   }
-
+  /*
   usleep(2000);
   IOWR(MIPI_PWDN_N_BASE, 0x00, 0xFF);
   usleep(2000);
@@ -443,7 +443,7 @@ int main()
 	   //Main loop delay
 	   usleep(10000);
 
-   };
+   }; */
   	  return 0;
 }
  	usleep(1000);

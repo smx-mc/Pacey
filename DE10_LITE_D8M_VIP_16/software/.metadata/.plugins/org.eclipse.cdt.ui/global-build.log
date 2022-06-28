@@ -1,5 +1,48 @@
-05:06:12 **** Build of configuration Nios II for project D8M_Camera_Test ****
-make mem_init_generate 
+08:53:51 **** Incremental Build of configuration Nios II for project D8M_Camera_Test ****
+make all 
 Info: Building ../D8M_Camera_Test_bsp/
 D:/quar18.1/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../D8M_Camera_Test_bsp/
 [BSP build complete]
+Info: Compiling main.c to obj/default/main.o
+nios2-elf-gcc -xc -MP -MMD -c -I../D8M_Camera_Test_bsp//HAL/inc -I../D8M_Camera_Test_bsp/ -I../D8M_Camera_Test_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED    -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=local  -o obj/default/main.o main.c
+In file included from ../D8M_Camera_Test_bsp//HAL/inc/os/alt_sem.h:82:0,
+                 from ../D8M_Camera_Test_bsp//drivers/inc/altera_avalon_uart.h:39,
+                 from main.c:123:
+../D8M_Camera_Test_bsp//HAL/inc/priv/alt_no_error.h: In function 'MIPI_Init':
+../D8M_Camera_Test_bsp//HAL/inc/priv/alt_no_error.h:68:41: error: invalid storage class for function 'alt_no_error'
+ static ALT_INLINE int ALT_ALWAYS_INLINE alt_no_error (void)
+                                         ^
+main.c:134:0: warning: "EXPOSURE_INIT" redefined
+ #define EXPOSURE_INIT 0x002000
+ ^
+main.c:23:0: note: this is the location of the previous definition
+ #define EXPOSURE_INIT 0x001600
+ ^
+main.c:136:0: warning: "GAIN_INIT" redefined
+ #define GAIN_INIT 0x600
+ ^
+main.c:25:0: note: this is the location of the previous definition
+ #define GAIN_INIT 0x410
+ ^
+main.c:233:5: warning: 'main' is normally a non-static function [-Wmain]
+ int main()
+     ^
+main.c: In function 'main':
+main.c:412:20: warning: format '%x' expects argument of type 'unsigned int', but argument 2 has type 'alt_u32 {aka long unsigned int}' [-Wformat=]
+             printf("\nExposure = %x ", exposureTime);
+                    ^
+main.c:412:20: warning: format '%x' expects argument of type 'unsigned int', but argument 2 has type 'alt_u32 {aka long unsigned int}' [-Wformat=]
+main.c:417:20: warning: format '%x' expects argument of type 'unsigned int', but argument 2 has type 'alt_u32 {aka long unsigned int}' [-Wformat=]
+             printf("\nExposure = %x ", exposureTime);
+                    ^
+main.c:417:20: warning: format '%x' expects argument of type 'unsigned int', but argument 2 has type 'alt_u32 {aka long unsigned int}' [-Wformat=]
+main.c: In function 'main':
+main.c:613:20: warning: format '%x' expects argument of type 'unsigned int', but argument 2 has type 'alt_u32 {aka long unsigned int}' [-Wformat=]
+             printf("\nExposure = %x ", exposureTime);
+                    ^
+main.c:613:20: warning: format '%x' expects argument of type 'unsigned int', but argument 2 has type 'alt_u32 {aka long unsigned int}' [-Wformat=]
+main.c:618:20: warning: format '%x' expects argument of type 'unsigned int', but argument 2 has type 'alt_u32 {aka long unsigned int}' [-Wformat=]
+             printf("\nExposure = %x ", exposureTime);
+                    ^
+main.c:618:20: warning: format '%x' expects argument of type 'unsigned int', but argument 2 has type 'alt_u32 {aka long unsigned int}' [-Wformat=]
+make: *** [obj/default/main.o] Error 1
