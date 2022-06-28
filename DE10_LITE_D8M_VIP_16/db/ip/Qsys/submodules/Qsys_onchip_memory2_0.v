@@ -36,7 +36,7 @@ module Qsys_onchip_memory2_0 (
                              )
 ;
 
-  parameter INIT_FILE = "D:/lab/test/Pacey/DE10_LITE_D8M_VIP_16/software/D8M_Camera_Test/mem_init/Qsys_onchip_memory2_0.hex";
+  parameter INIT_FILE = "D:/lab/EEE2Rover-master/DE10_LITE_D8M_VIP_16/software/D8M_Camera_Test/mem_init/Qsys_onchip_memory2_0.hex";
 
 
   output  [ 31: 0] readdata;

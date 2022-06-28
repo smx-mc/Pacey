@@ -1712,7 +1712,7 @@ java.io.FileNotFoundException: /home/estott/EEE2Rover/DE10_LITE_D8M_VIP_16/softw
 	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:1163)
 	at org.eclipse.core.internal.resources.DelayedSnapshotJob.run(DelayedSnapshotJob.java:52)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
-!SESSION 2022-06-28 08:50:58.709 -----------------------------------------------
+!SESSION 2022-06-28 05:03:13.291 -----------------------------------------------
 eclipse.buildId=4.5.2.M20160212-1500
 java.version=1.8.0_05
 java.vendor=Oracle Corporation
@@ -1720,10 +1720,10 @@ BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=zh_CN
 Framework arguments:  -product org.eclipse.epp.package.cpp.product -pluginCustomization D:/quar18.1/nios2eds/bin/eclipse_nios2/plugin_customization.ini
 Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.cpp.product -pluginCustomization D:/quar18.1/nios2eds/bin/eclipse_nios2/plugin_customization.ini
 
-!ENTRY org.eclipse.core.resources 2 10035 2022-06-28 08:51:22.164
+!ENTRY org.eclipse.core.resources 2 10035 2022-06-28 05:03:34.019
 !MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
 
-!ENTRY org.eclipse.epp.logging.aeri.ide 2 16 2022-06-28 08:51:28.720
+!ENTRY org.eclipse.epp.logging.aeri.ide 2 16 2022-06-28 05:03:40.494
 !MESSAGE Server ‘org.eclipse.epp.logging.aeri.ide.server’ failed with exception: Received fatal alert: handshake_failure. ; version: 1.100.0.v20160217-0435
 !STACK 0
 javax.net.ssl.SSLHandshakeException: Received fatal alert: handshake_failure
@@ -1754,19 +1754,10 @@ javax.net.ssl.SSLHandshakeException: Received fatal alert: handshake_failure
 	at com.google.common.util.concurrent.Callables$3.run(Callables.java:93)
 	at java.lang.Thread.run(Unknown Source)
 
-!ENTRY com.altera.sbtgui.core 4 0 2022-06-28 08:52:10.289
-!MESSAGE Error executing 'nios2-bsp-generate-files --bsp-dir . --settings settings.bsp', unexpected return code 1.
-
-Error message:
-
-SEVERE: BSP software component catalog cards not found for type: hal:18.0
-SEVERE: nios2-bsp-generate-files failed.
-
-
-!ENTRY org.eclipse.core.resources 4 568 2022-06-28 08:56:22.610
+!ENTRY org.eclipse.core.resources 4 568 2022-06-28 05:08:34.428
 !MESSAGE Could not write metadata for '/RemoteSystemsTempFiles'.
 !STACK 0
-java.io.FileNotFoundException: D:\lab\final\DE10_LITE_D8M_VIP_16\software\.metadata\.plugins\org.eclipse.core.resources\.projects\RemoteSystemsTempFiles\.markers.snap (系统找不到指定的路径。)
+java.io.FileNotFoundException: D:\lab\final\EEE\DE10_LITE_D8M_VIP_16\software\.metadata\.plugins\org.eclipse.core.resources\.projects\RemoteSystemsTempFiles\.markers.snap (系统找不到指定的路径。)
 	at java.io.FileOutputStream.open(Native Method)
 	at java.io.FileOutputStream.<init>(Unknown Source)
 	at java.io.FileOutputStream.<init>(Unknown Source)
@@ -1778,3 +1769,23 @@ java.io.FileNotFoundException: D:\lab\final\DE10_LITE_D8M_VIP_16\software\.metad
 	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:1163)
 	at org.eclipse.core.internal.resources.DelayedSnapshotJob.run(DelayedSnapshotJob.java:52)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+
+!ENTRY org.eclipse.ui.ide 4 4 2022-06-28 05:14:58.958
+!MESSAGE Problems saving workspace
+
+!ENTRY org.eclipse.ui.ide 4 1 2022-06-28 05:14:58.968
+!MESSAGE Problems occurred while trying to save the state of the workbench.
+!SUBENTRY 1 org.eclipse.core.resources 4 568 2022-06-28 05:14:58.968
+!MESSAGE Could not write metadata for '/RemoteSystemsTempFiles'.
+!STACK 0
+java.io.FileNotFoundException: D:\lab\final\EEE\DE10_LITE_D8M_VIP_16\software\.metadata\.plugins\org.eclipse.core.resources\.projects\RemoteSystemsTempFiles\.markers (系统找不到指定的路径。)
+	at java.io.FileOutputStream.open(Native Method)
+	at java.io.FileOutputStream.<init>(Unknown Source)
+	at java.io.FileOutputStream.<init>(Unknown Source)
+	at org.eclipse.core.internal.localstore.SafeFileOutputStream.<init>(SafeFileOutputStream.java:51)
+	at org.eclipse.core.internal.resources.SaveManager.visitAndSave(SaveManager.java:1658)
+	at org.eclipse.core.internal.resources.SaveManager.visitAndSave(SaveManager.java:1740)
+	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:1197)
+	at org.eclipse.core.internal.resources.Workspace.save(Workspace.java:2270)
+	at org.eclipse.ui.internal.ide.application.IDEWorkbenchAdvisor$4.run(IDEWorkbenchAdvisor.java:453)
+	at org.eclipse.jface.operation.ModalContext$ModalContextThread.run(ModalContext.java:119)
