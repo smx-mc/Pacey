@@ -10,6 +10,8 @@
 
 #include <fcntl.h>
 #include <unistd.h>
+#include "altera_avalon_uart_regs.h"
+#include "altera_avalon_uart.h"
 
 //EEE_IMGPROC defines
 #define EEE_IMGPROC_MSG_START ('R'<<16 | 'B'<<8 | 'B')
@@ -20,9 +22,9 @@
 #define EEE_IMGPROC_ID 2
 #define EEE_IMGPROC_BBCOL 3
 
-#define EXPOSURE_INIT 0x001600
+#define EXPOSURE_INIT 0x002000
 #define EXPOSURE_STEP 0x100
-#define GAIN_INIT 0x410
+#define GAIN_INIT 0x600
 #define GAIN_STEP 0x040
 #define DEFAULT_LEVEL 3
 
@@ -125,15 +127,19 @@ int main()
 	fcntl(STDIN_FILENO, F_SETFL, O_NONBLOCK);
 
   printf("DE10-LITE D8M VGA Demo\n");
-  printf("Imperial College EEE2 Project version\n");
+  printf("Imperial College EEE2 Project version 2\n");
+
+
   IOWR(MIPI_PWDN_N_BASE, 0x00, 0x00);
   IOWR(MIPI_RESET_N_BASE, 0x00, 0x00);
+  int dat;
+  int Swit;
+
 
   usleep(2000);
   IOWR(MIPI_PWDN_N_BASE, 0x00, 0xFF);
   usleep(2000);
   IOWR(MIPI_RESET_N_BASE, 0x00, 0xFF);
-
   printf("Image Processor ID: %x\n",IORD(0x42000,EEE_IMGPROC_ID));
   //printf("Image Processor ID: %x\n",IORD(EEE_IMGPROC_0_BASE,EEE_IMGPROC_ID)); //Don't know why this doesn't work - definition is in system.h in BSP
 
@@ -145,7 +151,7 @@ int main()
    if (!MIPI_Init()){
 	  printf("MIPI_Init Init failed!\r\n");
   }else{
-	  printf("MIPI_Init Init successfully!\r\n");
+	  printf("MIPI_Init Init successfully????\r\n");
   }
 
 //   while(1){
@@ -301,11 +307,41 @@ int main()
         	   printf("\nFocus = %x ",current_focus);
        	   	   break;}
        }
+       Swit =IORD(SW_BASE,0);
+       	  if (!(IORD_ALTERA_AVALON_UART_STATUS(UART_0_BASE) & ALTERA_AVALON_UART_STATUS_TRDY_MSK)) {
+       		  //printf ("oh no! \n");
+       	  }
 
+       	  dat =IORD_ALTERA_AVALON_UART_RXDATA(UART_0_BASE);
+       	  //printf("sw is %d \n", Swit);
+       	  //printf("uart base is %d \n", dat);
+       	  while(!(IORD_ALTERA_AVALON_UART_STATUS(UART_0_BASE) & ALTERA_AVALON_UART_STATUS_TRDY_MSK)) {
+       		  //printf("not transmitted \n");
+       	  }
+       	     // Send the byte
+       	  int word_s;
+       	  while ( ((IORD(0x42000,EEE_IMGPROC_STATUS)>>8) & 0xff)) { 	//Find out if there are words to read
+       	       	             int word = IORD(0x42000,EEE_IMGPROC_MSG); 			//Get next word from message buffer
+       	       	      	     word_s+=word;
+
+       	       	             if (word == EEE_IMGPROC_MSG_START)		{
+
+       	       	            	 IOWR_ALTERA_AVALON_UART_TXDATA(UART_0_BASE, word_s);//Newline on message identifier
+       	       	            	 word_s=0;
+       	       	             }
+       	       	      		 printf("\n");
+       	       	      	     printf("%08x ",word);
+       	       	         }
+       	     // Wait for transmit buffer to clear
+       	  while(!(IORD_ALTERA_AVALON_UART_STATUS(UART_0_BASE) & ALTERA_AVALON_UART_STATUS_TRDY_MSK)) {
+       		  //printf("transmitted \n");
+       	  }
+
+       	  usleep(5000);
 
 	   //Main loop delay
 	   usleep(10000);
 
    };
-  return 0;
+  	  return 0;
 }
